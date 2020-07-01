@@ -24,10 +24,6 @@ config/name="LUKSONG BABOY"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-ShakeCamera="*res://scripts/ShakeCamera.gd"
-
 [display]
 
 window/size/width=512

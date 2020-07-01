@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var shake_power = 4
+export var shake_power = 8
 export var shake_time = 0.4
 var isShake = false
 var curPos
@@ -14,12 +14,7 @@ func _process(delta):
 	if isShake:
 		_shakeCamera(delta)    
 
-func _input(event):
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and not isShake:
-		elapsedtime = 0
-		isShake = true
 
-#CALL ME TO SHAKE SCREEN
 func shake():
 	elapsedtime = 0
 	isShake = true

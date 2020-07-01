@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://scripts/ShakeCamera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ui/Start.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/tile.png" type="Texture" id=4]
@@ -32,42 +33,22 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 1 )
+
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8, 24 )
+extents = Vector2( 2.72758, 22.1829 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 2 )
-format = 1
-tile_data = PoolIntArray( 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ScoreArea" type="Area2D" parent="."]
-position = Vector2( 32, 160 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
-shape = SubResource( 3 )
-
-[node name="EnemyManager" type="Node2D" parent="."]
-position = Vector2( 672, 160 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Timer" type="Timer" parent="EnemyManager"]
-wait_time = 2.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Start" parent="CanvasLayer" instance=ExtResource( 2 )]
+margin_left = 0.420448
+margin_top = -2.30765
+margin_right = 0.420471
+margin_bottom = -2.30765
 
 [node name="Score" type="Label" parent="CanvasLayer"]
 anchor_left = 1.0
@@ -81,7 +62,51 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="area_entered" from="ScoreArea" to="." method="_on_ScoreArea_area_entered"]
-[connection signal="body_entered" from="ScoreArea" to="." method="_on_ScoreArea_body_entered"]
-[connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+format = 1
+tile_data = PoolIntArray( 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+position = Vector2( 96, 176 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2( 0, 9 )
+shape = SubResource( 4 )
+
+[node name="ScoreDetector" type="Area2D" parent="."]
+position = Vector2( 48, 160 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreDetector"]
+position = Vector2( 10.6487, 6.41081 )
+shape = SubResource( 3 )
+
+[node name="EnemyManager" type="Node2D" parent="."]
+position = Vector2( 672, 160 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="EnemyManager"]
+wait_time = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 254.797, 144.889 )
+current = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="start_clicked" from="CanvasLayer/Start" to="." method="_on_Start_start_clicked"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="area_entered" from="ScoreDetector" to="." method="_on_ScoreArea_area_entered"]
+[connection signal="body_entered" from="ScoreDetector" to="." method="_on_ScoreArea_body_entered"]
+[connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]
