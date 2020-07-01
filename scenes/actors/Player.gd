@@ -25,6 +25,7 @@ func _physics_process(delta) -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
 			motion.y = -JUMP_FORCE
+			$AudioStreamPlayer2D.play()
 	else:
 		pass
 		#animationPlayer.play("Run")

@@ -16,13 +16,13 @@ func show_replay(score: int) -> void:
 		top_score = score
 		$Title.text = "NEW TOP SCORE"
 		$TopScoreValue.text = str(top_score)
-		yield(get_tree().create_timer(.05), "timeout")
+		yield(get_tree().create_timer(.2), "timeout")
 		$Title.hide()
-		yield(get_tree().create_timer(.05), "timeout")
+		yield(get_tree().create_timer(.2), "timeout")
 		$Title.show()
-		yield(get_tree().create_timer(.05), "timeout")
+		yield(get_tree().create_timer(.2), "timeout")
 		$Title.hide()
-		yield(get_tree().create_timer(.05), "timeout")
+		yield(get_tree().create_timer(.2), "timeout")
 		$Title.show()
 	elif top_score == score:
 		$Title.text = "ALMOST, YOU GOT THIS"
