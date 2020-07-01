@@ -5,8 +5,6 @@ const PLAYER: PackedScene = preload("res://scenes/actors/Player.tscn")
 var score:= 0
 var is_player_active:= false
 var is_player_killed:= false
-onready var root = get_tree().get_root()
-onready var current_scene = root.get_child(root.get_child_count() - 1)
 
 
 func _on_Start_start_clicked():
@@ -15,8 +13,9 @@ func _on_Start_start_clicked():
 	player.position.y = 0
 	player.connect("killed", self, "_on_Player_killed")
 	
-	current_scene.add_child(player)
-	
+	#current_scene.add_child(player)
+	Global.current_scene.add_child(player)
+		
 	is_player_killed = false
 	score = 0
 	$CanvasLayer/Start.hide()
@@ -44,4 +43,5 @@ func _on_PlayerDetector_body_entered(body):
 	if not is_player_active && body.is_in_group("players"):
 		$Camera2D.shake()
 		is_player_active = true
+		$PlayerDetector/Dust.emitting = true
 		#START BK SCROLING

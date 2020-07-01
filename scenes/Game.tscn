@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/ShakeCamera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ui/Start.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/sprites/tile.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/score.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scenes/fx/Dust.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -33,10 +34,10 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 24, 1 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 2.72758, 22.1829 )
 
 [node name="Node2D" type="Node2D"]
@@ -76,7 +77,14 @@ position = Vector2( 96, 176 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2( 0, 9 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
+
+[node name="Dust" parent="PlayerDetector" instance=ExtResource( 7 )]
+position = Vector2( 0.248825, 0.63443 )
+z_index = 1
+emitting = false
+amount = 6
+one_shot = true
 
 [node name="ScoreDetector" type="Area2D" parent="."]
 position = Vector2( 48, 160 )
@@ -86,7 +94,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreDetector"]
 position = Vector2( 10.6487, 6.41081 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="EnemyManager" type="Node2D" parent="."]
 position = Vector2( 672, 160 )
@@ -107,6 +115,7 @@ __meta__ = {
 }
 [connection signal="start_clicked" from="CanvasLayer/Start" to="." method="_on_Start_start_clicked"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="area_entered" from="ScoreDetector" to="." method="_on_ScoreArea_area_entered"]
 [connection signal="body_entered" from="ScoreDetector" to="." method="_on_ScoreArea_body_entered"]
 [connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]

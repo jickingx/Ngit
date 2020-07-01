@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 signal killed
 
+const EXPLOSION: PackedScene = preload("res://scenes/fx/Explosion.tscn")
 const TARGET_FPS = 60
 const GRAVITY = 12
 const JUMP_FORCE = 384
@@ -36,5 +37,11 @@ func _physics_process(delta) -> void:
 
 
 func kill() -> void:
+	#TODO: make static typed
+	var explosion = EXPLOSION.instance()
+	explosion.position = self.position
+	Global.current_scene.add_child(explosion)
+	explosion.emitting = true
+	
 	emit_signal("killed")
 	queue_free()
