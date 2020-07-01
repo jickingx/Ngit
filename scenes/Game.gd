@@ -46,7 +46,7 @@ func _on_Player_killed() -> void:
 	$AudioStreamPlayer.set_stream(EXPLOSION)
 	$AudioStreamPlayer.play()
 	
-	#STOP BK SCROLING
+	$ScrollingBackground.stop()
 
 
 func _on_PlayerDetector_body_entered(body):
@@ -54,6 +54,8 @@ func _on_PlayerDetector_body_entered(body):
 		$Camera2D.shake()
 		is_player_active = true
 		$PlayerDetector/Dust.emitting = true
+		
 		$AudioStreamPlayer.set_stream(QUAKE)
 		$AudioStreamPlayer.play()
-		#START BK SCROLING
+		
+		$ScrollingBackground.start()
