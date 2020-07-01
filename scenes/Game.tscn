@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/actors/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/actors/Enemy00.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/Start.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=3]
-[ext_resource path="res://assets/tile.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/tile.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Game.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/score.tres" type="DynamicFont" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -31,21 +32,56 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 24 )
+
 [node name="Node2D" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 96, 160 )
-
-[node name="Enemy00" parent="." instance=ExtResource( 2 )]
-position = Vector2( 608, 160 )
+script = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 format = 1
 tile_data = PoolIntArray( 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScoreArea" type="Area2D" parent="."]
+position = Vector2( 32, 160 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+shape = SubResource( 3 )
 
 [node name="EnemyManager" type="Node2D" parent="."]
 position = Vector2( 672, 160 )
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Timer" type="Timer" parent="EnemyManager"]
+wait_time = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Start" parent="CanvasLayer" instance=ExtResource( 2 )]
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -72.0
+margin_right = -8.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 6 )
+text = "00"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="area_entered" from="ScoreArea" to="." method="_on_ScoreArea_area_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_ScoreArea_body_entered"]
+[connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]
+[connection signal="start_clicked" from="CanvasLayer/Start" to="." method="_on_Start_start_clicked"]

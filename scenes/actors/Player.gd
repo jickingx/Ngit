@@ -1,13 +1,23 @@
+class_name Player
 extends KinematicBody2D
 
+signal killed
+
 const TARGET_FPS = 60
-const GRAVITY = 10
-const JUMP_FORCE = 320
+const GRAVITY = 12
+const JUMP_FORCE = 384
 const X_POSITION = 96
 
 var motion = Vector2.ZERO
+var is_disabled:= false  
+
+func _ready()-> void:
+	position.x = X_POSITION
 
 func _physics_process(delta) -> void:
+	if is_disabled:
+		return
+	
 	#animationPlayer.play("Run")
 	motion.y += GRAVITY * delta * TARGET_FPS
 	
@@ -23,3 +33,8 @@ func _physics_process(delta) -> void:
 			#$AnimatedSprite.play("JumpDown")
 	
 	motion = move_and_slide(motion, Vector2.UP)
+
+
+func kill() -> void:
+	emit_signal("killed")
+	queue_free()
