@@ -3,10 +3,10 @@ extends KinematicBody2D
 
 signal killed
 
-const EXPLOSION: PackedScene = preload("res://scenes/fx/Explosion.tscn")
+const EXPLOSION: PackedScene = preload("res://src/fx/Explosion.tscn")
 const TARGET_FPS = 60
-const GRAVITY = 12
-const JUMP_FORCE = 384
+const GRAVITY = 24
+const JUMP_FORCE = 576
 const X_POSITION = 96
 
 var motion = Vector2.ZERO

@@ -1,7 +1,6 @@
 extends Area2D
 
-const SPEED = 256
-
+export var speed = 256
 var motion = Vector2.ZERO
 var spawn_position: Vector2 = Vector2.ZERO
 
@@ -11,7 +10,7 @@ func _ready():
 
 
 func _process(delta):
-	move_local_x(- SPEED * delta)
+	move_local_x(- speed * delta)
 
 
 func _on_VisibilityNotifier2D_screen_exited():

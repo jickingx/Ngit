@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scenes/actors/Player.gd"
+"path": "res://src/actors/Player.gd"
 } ]
 _global_script_class_icons={
 "Player": ""
@@ -21,12 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="LUKSONG BABOY"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://scripts/Global.gd"
+Global="*res://src/Global.gd"
 
 [display]
 

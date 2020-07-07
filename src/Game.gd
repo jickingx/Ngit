@@ -1,6 +1,6 @@
 extends Node2D
 
-const PLAYER: PackedScene = preload("res://scenes/actors/Player.tscn")
+const PLAYER: PackedScene = preload("res://src/actors/Player.tscn")
 var COIN = preload("res://assets/sounds/coin.wav")
 var EXPLOSION = preload("res://assets/sounds/explosion.wav")
 var START_GAME = preload("res://assets/sounds/start.wav")
