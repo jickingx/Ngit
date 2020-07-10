@@ -11,6 +11,10 @@ var is_player_active:= false
 var is_player_killed:= false
 
 
+func _ready():
+	$MusicBk.play()
+
+
 func _on_Start_start_clicked():
 	#TODO: make static typed
 	var player = PLAYER.instance()

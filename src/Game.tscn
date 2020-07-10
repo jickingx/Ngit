@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/fx/ShakeCamera.gd" type="Script" id=1]
 [ext_resource path="res://src/ui/Start.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/EnemyManager.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/ngit.wav" type="AudioStream" id=4]
 [ext_resource path="res://src/Game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/score.tres" type="DynamicFont" id=6]
 [ext_resource path="res://src/fx/Dust.tscn" type="PackedScene" id=7]
@@ -92,6 +93,9 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 320, 206 )
 shape = SubResource( 3 )
+
+[node name="MusicBk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="start_clicked" from="CanvasLayer/Start" to="." method="_on_Start_start_clicked"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="area_entered" from="ScoreDetector" to="." method="_on_ScoreArea_area_entered"]

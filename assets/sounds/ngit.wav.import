@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ngit.wav-161483186f0c005ef1e8980a687697a5.sample"
+
+[deps]
+
+source_file="res://assets/sounds/ngit.wav"
+dest_files=[ "res://.import/ngit.wav-161483186f0c005ef1e8980a687697a5.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
