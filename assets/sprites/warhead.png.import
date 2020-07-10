@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player.png-6b57db84381cf627c90e174b0fb1a52c.stex"
+path="res://.import/warhead.png-baee490e8f87eae899a3e4cc7a5b07cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/actors/Player.png"
-dest_files=[ "res://.import/Player.png-6b57db84381cf627c90e174b0fb1a52c.stex" ]
+source_file="res://assets/sprites/warhead.png"
+dest_files=[ "res://.import/warhead.png-baee490e8f87eae899a3e4cc7a5b07cc.stex" ]
 
 [params]
 

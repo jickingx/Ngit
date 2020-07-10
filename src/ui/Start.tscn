@@ -1,17 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/ui/Start.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/score.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/sprites/title.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/title01.png" type="Texture" id=4]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 6.0
-} ]
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("logo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.277392, 0.31864, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.45, 0.45 ), Vector2( 0.5, 0.5 ) ]
+}
 
 [node name="Start" type="Control"]
 anchor_right = 1.0
@@ -96,10 +104,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="logo" type="AnimatedSprite" parent="."]
+[node name="logo" type="Sprite" parent="."]
 position = Vector2( 259, 104 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 1 )
-frame = 1
-playing = true
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 1 )
 [connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]

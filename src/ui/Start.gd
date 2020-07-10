@@ -4,7 +4,14 @@ signal start_clicked
 
 var top_score:= 0
 
+func _ready():
+	$AnimationPlayer.play("default")
+
+
 func _on_Button_button_up():
+	if(top_score == top_score):
+		
+		yield(get_tree().create_timer(.2), "timeout")
 	emit_signal("start_clicked")
 
 func show_replay(score: int) -> void:
@@ -12,6 +19,7 @@ func show_replay(score: int) -> void:
 	$Button.text = "TAP TO JUMP AGAIN"
 	$Button.hide()
 	$logo.hide()
+	$AnimationPlayer.stop()
 	
 	if top_score < score:
 		top_score = score

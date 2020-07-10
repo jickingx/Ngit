@@ -70,7 +70,8 @@ position = Vector2( 10.6487, 6.41081 )
 shape = SubResource( 2 )
 
 [node name="EnemyManager" type="Node2D" parent="."]
-position = Vector2( 672, 160 )
+position = Vector2( 640, 144 )
+scale = Vector2( 0.801901, 2.56707 )
 script = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="EnemyManager"]

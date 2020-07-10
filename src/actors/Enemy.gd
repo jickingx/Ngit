@@ -6,7 +6,7 @@ var spawn_position: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	pass
+	$AnimationPlayer.play("default")
 
 
 func _process(delta):
