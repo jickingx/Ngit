@@ -9,8 +9,9 @@ func _on_Button_button_up():
 
 func show_replay(score: int) -> void:
 	visible = true
-	$Button.text = "PLAY AGAIN"
+	$Button.text = "TAP TO JUMP AGAIN"
 	$Button.hide()
+	$logo.hide()
 	
 	if top_score < score:
 		top_score = score

@@ -1,60 +1,21 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/fx/ShakeCamera.gd" type="Script" id=1]
 [ext_resource path="res://src/ui/Start.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/EnemyManager.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/tile.png" type="Texture" id=4]
 [ext_resource path="res://src/Game.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/score.tres" type="DynamicFont" id=6]
 [ext_resource path="res://src/fx/Dust.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ui/ScrollingBackground.tscn" type="PackedScene" id=8]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
-
-[sub_resource type="TileSet" id=2]
-resource_local_to_scene = true
-0/name = "tile.png 0"
-0/texture = ExtResource( 4 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 64, 64 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 1 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
-1/name = "tile.png 1"
-1/texture = ExtResource( 4 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 64, 64, 64 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape_one_way = false
-1/shape_one_way_margin = 0.0
-1/shapes = [  ]
-1/z_index = 0
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 1 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2.72758, 22.1829 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 384, 10 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
@@ -73,22 +34,15 @@ margin_bottom = -2.30765
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -72.0
+margin_top = 3.0
 margin_right = -8.0
-margin_bottom = 36.0
+margin_bottom = 39.0
 custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "00"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
-}
-
-[node name="TileMap" type="TileMap" parent="."]
-visible = false
-tile_set = SubResource( 2 )
-format = 1
-tile_data = PoolIntArray( 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 327677, 1, 0, 327678, 1, 0, 327679, 1, 0, 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0 )
-__meta__ = {
-"_edit_lock_": true
 }
 
 [node name="PlayerDetector" type="Area2D" parent="."]
@@ -96,7 +50,7 @@ position = Vector2( 96, 176 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 position = Vector2( 0, 9 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Dust" parent="PlayerDetector" instance=ExtResource( 7 )]
 position = Vector2( 0.248825, 0.63443 )
@@ -113,7 +67,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreDetector"]
 position = Vector2( 10.6487, 6.41081 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="EnemyManager" type="Node2D" parent="."]
 position = Vector2( 672, 160 )
@@ -131,9 +85,14 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 320, 206 )
+shape = SubResource( 3 )
 [connection signal="start_clicked" from="CanvasLayer/Start" to="." method="_on_Start_start_clicked"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
-[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]
 [connection signal="area_entered" from="ScoreDetector" to="." method="_on_ScoreArea_area_entered"]
 [connection signal="body_entered" from="ScoreDetector" to="." method="_on_ScoreArea_body_entered"]
 [connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]
