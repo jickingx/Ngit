@@ -19,20 +19,19 @@ func _physics_process(delta) -> void:
 	if is_disabled:
 		return
 	
-	#animationPlayer.play("Run")
 	motion.y += GRAVITY * delta * TARGET_FPS
 	
 	if is_on_floor():
+		$AnimatedSprite.play("run")
 		if Input.is_action_just_pressed("ui_up"):
 			motion.y = -JUMP_FORCE
 			$AudioStreamPlayer2D.play()
+			$AnimatedSprite.play("jump")
 	else:
-		pass
-		#animationPlayer.play("Run")
-		#if(motion.y - get_position().y < 0):
-			#$AnimatedSprite.play("JumpUp")
-		#else:
-			#$AnimatedSprite.play("JumpDown")
+		if(motion.y - get_position().y < 0):
+			$AnimatedSprite.play("jump")
+		else:
+			$AnimatedSprite.play("fall")
 	
 	motion = move_and_slide(motion, Vector2.UP)
 
