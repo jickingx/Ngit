@@ -1,3 +1,6 @@
-# Luksong Baboy
-Just another simple endless runner game made in godot 3.2 inspired by "luksong baka" game.
+# NGIT
+just another endless runner but with NGIT on it.
 
+play it on
+https://jickingx.itch.io/ngit
+https://jickingx.gamejolt.io/ngit
